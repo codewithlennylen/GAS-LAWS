@@ -13,14 +13,16 @@ RED = (255, 0, 0)
 CLOCK = pygame.time.Clock()
 FPS = 30
 
+particles_list = []
+
 
 class GasParticle():
     def __init__(self, boundary):
-        self.radius = 5
+        self.radius = 10
         self.pos_x = random.randrange(
-            boundary[0] + self.radius, boundary[0] + boundary[2])
+            boundary[0] + self.radius, (boundary[0] + boundary[2]) - self.radius)
         self.pos_y = random.randrange(
-            boundary[1] + self.radius, boundary[1] + boundary[3])
+            boundary[1] + self.radius, (boundary[1] + boundary[3]) - self.radius)
         self.velocity = 2
         self.color = RED
         self.center = [self.pos_x, self.pos_y]
@@ -35,13 +37,19 @@ class GasParticle():
         pygame.draw.circle(SCREEN, self.color, self.center, self.radius)
 
 
-p1 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
-p2 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
+# p1 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
+# p2 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
 
 
 def generate_particles(n):
-    pass
+    global particles_list
 
+    for i in range(n):
+        p = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
+        particles_list.append(p)
+
+
+generate_particles(10)
 
 done = False
 while not done:
@@ -54,8 +62,11 @@ while not done:
     pygame.draw.rect(SCREEN, BLACK, pygame.Rect(
         WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600), 5)
 
-    p1.draw()
-    p2.draw()
+    for p in particles_list:
+        p.draw()
+
+    # p1.draw()
+    # p2.draw()
 
     # pygame.draw.rect(SCREEN, BLACK, pygame.Rect(
     #     10, HEIGHT//2 - 125, 300, 250), 5)
