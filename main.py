@@ -28,7 +28,8 @@ class GasParticle():
         self.center = [self.pos_x, self.pos_y]
 
     def move(self):
-        pass
+        self.pos_x += self.velocity
+        self.pos_y += self.velocity
 
     def collide(self):
         pass
@@ -37,7 +38,7 @@ class GasParticle():
         pygame.draw.circle(SCREEN, self.color, self.center, self.radius)
 
 
-# p1 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
+p1 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
 # p2 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
 
 
@@ -49,7 +50,7 @@ def generate_particles(n):
         particles_list.append(p)
 
 
-generate_particles(10)
+# generate_particles(10)
 
 done = False
 while not done:
@@ -62,10 +63,12 @@ while not done:
     pygame.draw.rect(SCREEN, BLACK, pygame.Rect(
         WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600), 5)
 
-    for p in particles_list:
-        p.draw()
+    # for p in particles_list:
+    #     p.draw()
+    #     p.move()
 
-    # p1.draw()
+    p1.draw()
+    p1.move()
     # p2.draw()
 
     # pygame.draw.rect(SCREEN, BLACK, pygame.Rect(
