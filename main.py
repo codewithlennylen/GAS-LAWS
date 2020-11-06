@@ -60,14 +60,14 @@ class GasParticle():
             if self.center[0] + self.radius > gas_particle.center[0] - gas_particle.radius:
                 if self.center[1] > gas_particle.center[1] - gas_particle.radius and self.center[1] < gas_particle.center[1] + gas_particle.radius:
                     self.x_direction = False
-            elif self.center[0] < gas_particle.center[0]:
+            elif self.center[0] - self.radius < gas_particle.center[0] + gas_particle.radius:
                 if self.center[1] > gas_particle.center[1] - gas_particle.radius and self.center[1] < gas_particle.center[1] + gas_particle.radius:
                     self.x_direction = True
 
             if self.center[1] + self.radius > gas_particle.center[1] - gas_particle.radius:
                 if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
                     self.y_direction = False
-            elif self.center[1] < gas_particle.center[1]:
+            elif self.center[1] - self.radius < gas_particle.center[1] + gas_particle.radius:
                 if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
                     self.y_direction = True
 
@@ -83,8 +83,8 @@ class GasParticle():
         #         self.y_direction = True
 
     def collide(self):
-        self.collide_with_container()
-        # self.collide_with_particle()
+        # self.collide_with_container()
+        self.collide_with_particle()
 
     def draw(self):
         pygame.draw.circle(SCREEN, self.color, self.center, self.radius)
