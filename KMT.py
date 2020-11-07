@@ -16,6 +16,19 @@ FPS = 30
 particles_list = []
 
 
+class Container(object):
+    def __init__(self):
+        self.color = BLACK
+        self.width = 600
+        self.height = 600
+        self.pos_x = ((WIDTH // 2) - (self.width // 2))
+        self.pos_y = ((HEIGHT // 2) - (self.height // 2))
+
+    def draw(self):
+        pygame.draw.rect(SCREEN, self.color, pygame.Rect(
+            self.pos_x, self.pos_y, self.width, self.height), 5)
+
+
 class GasParticle():
     def __init__(self, boundary):
         """Initialize the Object/Instance
@@ -110,19 +123,17 @@ class GasParticle():
         pygame.draw.circle(SCREEN, self.color, self.center, self.radius)
 
 
-# p1 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
-# p2 = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
-
-
-def generate_particles(n):
+def generate_particles(container, n):
     global particles_list
 
     for _ in range(n):
-        p = GasParticle([WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600])
+        p = GasParticle([container.pos_x, container.pos_y,
+                         container.width, container.height])
         particles_list.append(p)
 
 
-generate_particles(10)
+container = Container()
+generate_particles(container, 10)
 
 done = False
 while not done:
@@ -136,8 +147,7 @@ while not done:
 
     SCREEN.fill(WHITE)
 
-    pygame.draw.rect(SCREEN, BLACK, pygame.Rect(
-        WIDTH//2 - 300, HEIGHT//2 - 300, 600, 600), 5)
+    container.draw()
 
     for p in particles_list:
         p.draw()
