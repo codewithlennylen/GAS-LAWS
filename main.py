@@ -17,10 +17,10 @@ particles_list = []
 
 
 class Container(object):
-    def __init__(self):
+    def __init__(self, width=600, height=600):
         self.color = BLACK
-        self.width = 600
-        self.height = 600
+        self.width = width
+        self.height = height
         self.pos_x = ((WIDTH // 2) - (self.width // 2))
         self.pos_y = ((HEIGHT // 2) - (self.height // 2))
 
@@ -131,8 +131,18 @@ def generate_particles(container, n):
         particles_list.append(p)
 
 
-container = Container()
+container = Container(500, 500)
 generate_particles(container, 10)
+
+main_font = pygame.font.SysFont('comicsans', 50)
+lost_font = pygame.font.SysFont('comicsans', 60)
+
+# Draw text
+lives_label = main_font.render(f"Lives : {lives}", 1, (255, 255, 255))
+level_label = main_font.render(f"Level : {level}", 1, (255, 255, 255))
+
+WIN.blit(lives_label, (10, 10))
+WIN.blit(level_label, (WIDTH-level_label.get_width() - 10, 10))
 
 done = False
 while not done:
