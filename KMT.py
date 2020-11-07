@@ -25,11 +25,13 @@ class GasParticle():
                             (Within which the particles are held and collide against)
                             Pos_X, Pos_Y, Width, Height
         """
-        self.radius = 10 # Particle Radius
-        self.velocity_range = [2,3,4]
+        self.radius = 10  # Particle Radius
+        self.velocity_range = [2, 3, 4]
         self.velocity = random.choice(self.velocity_range)
-        self.x_direction = random.choice([True, False])  # True = Positive && False = Negative
-        self.y_direction = random.choice([True, False])  # True = Positive && False = Negative
+        # True = Positive && False = Negative
+        self.x_direction = random.choice([True, False])
+        # True = Positive && False = Negative
+        self.y_direction = random.choice([True, False])
         self.color = RED
 
         # List of defined Particles for particle-collision
@@ -67,7 +69,7 @@ class GasParticle():
             self.y_direction = False
         elif self.center[1] - self.radius < self.boundary[1]:
             self.y_direction = True
-    
+
     def collide_with_particle(self):
         """This handles the collision of this.particle with other particles. 
         BUG : Still not working. All particles assemble to one corner upon collision.
