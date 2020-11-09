@@ -9,6 +9,7 @@ SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
 CLOCK = pygame.time.Clock()
 FPS = 30
@@ -138,11 +139,10 @@ main_font = pygame.font.SysFont('comicsans', 50)
 lost_font = pygame.font.SysFont('comicsans', 60)
 
 # Draw text
-lives_label = main_font.render(f"Lives : {lives}", 1, (255, 255, 255))
-level_label = main_font.render(f"Level : {level}", 1, (255, 255, 255))
+lives_label = main_font.render(f"Which Law ? ", 1, BLUE)
+level_label = main_font.render(f"Level", 1, BLUE)
 
-WIN.blit(lives_label, (10, 10))
-WIN.blit(level_label, (WIDTH-level_label.get_width() - 10, 10))
+
 
 done = False
 while not done:
@@ -156,7 +156,11 @@ while not done:
 
     SCREEN.fill(WHITE)
 
+
     container.draw()
+
+    SCREEN.blit(lives_label, (10, 10))
+    SCREEN.blit(level_label, (WIDTH-level_label.get_width() - 10, 10))
 
     for p in particles_list:
         p.draw()
