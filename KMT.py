@@ -39,7 +39,7 @@ class GasParticle():
                             Pos_X, Pos_Y, Width, Height
         """
         self.radius = 10  # Particle Radius
-        self.velocity_range = [2, 3, 4]
+        self.velocity_range = [10, 8, 6]
         self.velocity = random.choice(self.velocity_range)
         # True = Positive && False = Negative
         self.x_direction = random.choice([True, False])
@@ -133,7 +133,7 @@ def generate_particles(container, n):
 
 
 container = Container()
-generate_particles(container, 10)
+generate_particles(container, 20)
 
 done = False
 while not done:
