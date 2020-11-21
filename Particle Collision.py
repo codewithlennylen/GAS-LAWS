@@ -20,7 +20,6 @@ CLOCK = pygame.time.Clock()
 FPS = 30
 
 
-
 done = False
 while not done:
     for event in pygame.event.get():
@@ -33,14 +32,15 @@ while not done:
 
     SCREEN.fill(WHITE)
 
-    obj_x, obj_y = 300,300
+    obj_x, obj_y = 300, 300
     circle1 = pygame.draw.circle(SCREEN, RED, (obj_x, obj_y), 50)
-    pos_x, pos_y = mouse_pos[0],mouse_pos[1]
+    pos_x, pos_y = mouse_pos[0], mouse_pos[1]
     circle2 = pygame.draw.circle(SCREEN, RED, (pos_x, pos_y), 50)
 
-    if (pos_x + 50 > obj_x - 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)) and (pos_x - 50 < obj_x + 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)):
+    # Rather complex Collision-Logic But will work just fine for now!
+    if (pos_x + 50 > obj_x - 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)) and \
+        (pos_x - 50 < obj_x + 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)):
         print('Collide')
-
 
     pygame.display.update()
     CLOCK.tick(FPS)

@@ -39,7 +39,7 @@ class GasParticle():
                             Pos_X, Pos_Y, Width, Height
         """
         self.radius = 10  # Particle Radius
-        self.velocity_range = [10, 8, 6]
+        self.velocity_range = [2, 3, 4]
         self.velocity = random.choice(self.velocity_range)
         # True = Positive && False = Negative
         self.x_direction = random.choice([True, False])
@@ -87,20 +87,24 @@ class GasParticle():
         """This handles the collision of this.particle with other particles. 
         BUG : Still not working. All particles assemble to one corner upon collision.
         """
+        # if (pos_x + 50 > obj_x - 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)) and \
+        # (pos_x - 50 < obj_x + 50 and (pos_y + 50 > obj_y - 50 and pos_y - 50 < obj_y + 50)):
+        #     print('Collide')
+
         for gas_particle in self.gas_particles:
             if self.center[0] + self.radius > gas_particle.center[0] - gas_particle.radius:
-                if self.center[1] > gas_particle.center[1] - gas_particle.radius and self.center[1] < gas_particle.center[1] + gas_particle.radius:
+                if self.center[1] + self.radius > gas_particle.center[1] - gas_particle.radius and self.center[1] - self.radius < gas_particle.center[1] + gas_particle.radius:
                     self.x_direction = False
             elif self.center[0] - self.radius < gas_particle.center[0] + gas_particle.radius:
-                if self.center[1] > gas_particle.center[1] - gas_particle.radius and self.center[1] < gas_particle.center[1] + gas_particle.radius:
+                if self.center[1] + self.radius > gas_particle.center[1] - gas_particle.radius and self.center[1] - self.radius < gas_particle.center[1] + gas_particle.radius:
                     self.x_direction = True
 
-            if self.center[1] + self.radius > gas_particle.center[1] - gas_particle.radius:
-                if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
-                    self.y_direction = False
-            elif self.center[1] - self.radius < gas_particle.center[1] + gas_particle.radius:
-                if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
-                    self.y_direction = True
+            # if self.center[1] + self.radius > gas_particle.center[1] - gas_particle.radius:
+            #     if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
+            #         self.y_direction = False
+            # elif self.center[1] - self.radius < gas_particle.center[1] + gas_particle.radius:
+            #     if self.center[0] > gas_particle.center[0] - gas_particle.radius and self.center[0] < gas_particle.center[0] + gas_particle.radius:
+            #         self.y_direction = True
 
         # for gas_particle in self.gas_particles:
         #     if self.center[0] + self.radius >= gas_particle.center[0] - gas_particle.radius:
@@ -114,7 +118,7 @@ class GasParticle():
         #         self.y_direction = True
 
     def collide(self):
-        # self.collide_with_particle()
+        self.collide_with_particle()
         self.collide_with_container()
 
     def draw(self):
@@ -133,7 +137,7 @@ def generate_particles(container, n):
 
 
 container = Container()
-generate_particles(container, 20)
+generate_particles(container, 10)
 
 done = False
 while not done:
